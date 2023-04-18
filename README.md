@@ -1,2 +1,2 @@
-# button_counter_frontend
-Testing tech stack - frontend
+# button_app
+Testing tech stack
