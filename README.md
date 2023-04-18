@@ -1,2 +1,9 @@
 # button_app
-Testing tech stack
+Testing tech stack: 
+* Frontend = React Gatsby
+* Backend = Django
+* DB = postgres
+
+
+
+
