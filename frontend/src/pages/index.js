@@ -1,74 +1,68 @@
 import React, { useState, useEffect } from 'react';
 
 const IndexPage = () => {
-  let [clickInfo, setClickInfo] = useState(0);
-  let [loading, setLoading] = useState(true);
+  let [clickData, setClickData] = useState(null);
+
+  const fetchDataOnLoad = async () => {
+    const response = await fetch('http://localhost:8000/on-load/', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await response.json();
+    clickData = data.objNumClicks;
+    setClickData(clickData);
+    console.log(data);
+  };
+
+  const updateData = async () => {
+    const response = await fetch('http://localhost:8000/update-clicks/', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+      const data = await response.json();
+      clickData = data.objNumClicks;
+      setClickData(clickData);
+      console.log(data);
+  };
+
+  const deleteData = async () => {
+    const response = await fetch('http://localhost:8000/update-clicks/', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await response.json();
+    clickData = data.objNumClicks;
+    setClickData(clickData);
+    console.log(data);
+
+    if (data.objNumClicks !== -1) console.log("error in deleteData()");
+  };
+
+  const resetData = async () => {
+    const response = await fetch('http://localhost:8000/reset-clicks/', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json '}
+    });
+    const data = await response.json();
+    clickData = data.objNumClicks;
+    setClickData(clickData);
+    console.log(data);
+
+    if (data.objNumClicks !== 0) console.log("error in resetData()");
+  }
 
   // runs upon first page load
   useEffect(() => {
-    getData();
+    fetchDataOnLoad();
   }, []);
-
-  // get data from api upon page load/reload
-  let getData = async () => {
-    let response = await fetch("http://localhost:8000/api/clicked/1/");
-    let data = await response.json();
-    // when data is returned then setClickInfo and setLoading to be false so click info can be displayed
-    setClickInfo(data);
-    setLoading(false);
-    // console.log("getData ->data: ", data);
-    // console.log("getData ->clickInfo: ", clickInfo);
-  };
-
-  // runs onClick for increase count button  
-  const updateData = async () => {
-    // increment counter by 1 by getting clickInfo object and modifying num_clicks property
-    const newInfo = {
-      ...clickInfo,
-      num_clicks: clickInfo.num_clicks + 1
-    }
-
-    // overwrite clickInfo and set it
-    clickInfo = newInfo;
-    setClickInfo(newInfo);
-
-    // this line is hardcoded...
-    await fetch("http://localhost:8000/api/clicked/1/", {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ...clickInfo, 'updated': new Date() })
-    });
-    // console.log("update -> clickInfo: ", clickInfo.num_clicks)
-  };
-
-  // runs onClick for reset count button
-  const resetData = async () => {
-    const newInfo = {
-      ...clickInfo,
-      num_clicks: 0
-    }
-
-    clickInfo = newInfo;
-    setClickInfo(newInfo);
-
-    await fetch("http://localhost:8000/api/clicked/1/", {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ...clickInfo, 'updated': new Date() })
-    });
-    console.log("update: ", clickInfo.num_clicks)
-  };
 
 
   return (
     <div>
       {/* Will be updated each time clickInfo is set */}
-      {loading ? <div>...</div> : <div>This button has been mashed {clickInfo.num_clicks} times.</div>}
-      
+      {clickData === -1 ? <div>Click obj deleted. Press increase to create new obj and keep counting...</div> 
+                        : <div>This button has been mashed {clickData} times.</div>}
+
       <button onClick={() => {
         updateData();
         } 
@@ -77,6 +71,10 @@ const IndexPage = () => {
       <button onClick={() => {
         resetData();
       }}>Reset count</button>
+
+      <button onClick={() => {
+        deleteData();
+      }}>Delete object from database</button>
 
     </div>
   );

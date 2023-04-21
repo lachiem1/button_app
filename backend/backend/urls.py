@@ -23,5 +23,12 @@ router.register(r'clicked', views.ClickView, 'click_count')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('on-load/', views.on_load, name='on-load'),
+    path('update-clicks/', views.update_clicks, name='update-clicks'),
+    path('reset-clicks/', views.reset_clicks, name='reset-clicks'),
 ]
+
+
+# delete obj from database using button instead of reset
+# frontend: sass -> style using sass
