@@ -8,12 +8,6 @@ class ClickView(viewsets.ModelViewSet):
     serializer_class = ClickSerializer
     queryset = Click.objects.all()
 
-# @csrf_exempt
-# def get_id(request):
-#     if Click.objects.all().exists() and request.method == 'GET':
-#         click_obj = Click
-
-@csrf_exempt
 def on_load(request):
     # if using GET and database is empty
     if request.method == 'GET' and not Click.objects.all().exists():
@@ -26,8 +20,6 @@ def on_load(request):
     else:
         return JsonResponse({'status': 'on_load() - invalid fetch method'})
 
-
-@csrf_exempt
 def update_clicks(request):
     # check if a click object already exists in my database
     if Click.objects.all().exists():
