@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+// any mixins here
+@mixin general-button-styling {
+    margin: 0 10px;
+    border-radius: 8px;
+    font-size: 40px;
+    font-family: 'Orbitron';
+    color: black;
+    -webkit-text-stroke: 0.02em white;
+    text-stroke: 2px white;
+    border-width: 0.2em;
+}
+
+@mixin code-looking-text {
+    font-family: 'Press Start 2P';
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+// other stuff here
+.overall-container {
+    height: 100vh;
+    width: 100vw;
+    margin-left: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    border-bottom: 5px solid lime;
+    box-shadow: 0 -1px 5px 2px white; // offset_x, offset_y, blur_radius, spread_radius
+}
+
+.navbar-title {
+    @include code-looking-text();
+    padding-top: 0.5rem;
+    // padding-bottom: 10rem;
+    color: lime;
+    -webkit-text-stroke: 0.02em white;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.click-text {
+    @include code-looking-text();
+    color: white;
+    font-size: 30px;
+    margin: 4rem 0 10rem 0; // top, right, bottom, left
+}
+
+.reset-button {
+    @include general-button-styling();
+    background-color: lightblue;
+}
+
+.increase-button {
+    @include general-button-styling();
+    background: lightgreen;
+}
+
+.delete-button {
+    @include general-button-styling();
+    background: lightcoral;
+}
+
+
+// hover and active states for buttons
+.increase-button:hover {
+    background-color: mediumspringgreen;
+}
+.increase-button:active {
+    color:darkgray;
+    background-color: greenyellow;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.75);
+
+}
+
+.reset-button:hover {
+    background-color: skyblue;
+}
+.reset-button:active {
+    color: darkgray;
+    background-color: deepskyblue;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.75);
+
+}
+
+.delete-button:hover {
+    background-color: rgb(212, 60, 60);
+}
+.delete-button:active {
+    color: darkgray;
+    background-color: red;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.75);
+}
