@@ -20,6 +20,7 @@ def on_load(request):
     else:
         return JsonResponse({'status': 'on_load() - invalid fetch method'})
 
+@csrf_exempt # I think DELETE request requires this decorator in place of using authentication
 def update_clicks(request):
     # check if a click object already exists in my database
     if Click.objects.all().exists():
