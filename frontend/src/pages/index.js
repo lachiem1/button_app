@@ -40,7 +40,7 @@ const IndexPage = () => {
     setClickData(clickData);
     console.log(data);
 
-    if (data.objNumClicks !== 0) console.log("error in resetData()");
+    if (data.objNumClicks > 0) console.log("error in resetData()");
   }
 
   const deleteData = async () => {
