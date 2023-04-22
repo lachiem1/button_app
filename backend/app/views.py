@@ -61,7 +61,8 @@ def reset_clicks(request):
                                  'objNumClicks': click_obj.num_clicks})
         
     else:
-        return JsonResponse({'status': 'invalid reset request'})
+        return JsonResponse({'status': 'invalid reset request',
+                             'objNumClicks': -1})
 
 
     
