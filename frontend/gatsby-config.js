@@ -3,8 +3,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `frontend`,
+    title: `Button Masher App`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [],
+  plugins: [`gatsby-plugin-sass`],
 }
