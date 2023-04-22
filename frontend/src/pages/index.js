@@ -20,7 +20,6 @@ const IndexPage = () => {
   };
 
   const updateData = async () => {
-    console.log('updateData being called')
     const response = await fetch('http://localhost:8000/update-clicks/', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
