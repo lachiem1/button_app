@@ -39,7 +39,8 @@ def update_clicks(request):
     else:
         # don't want to delete if there is nothing to delete
         if request.method == 'DELETE':
-            return JsonResponse({'status': 'cannot delete obj - db is empty'})
+            return JsonResponse({'status': 'cannot delete obj - db is empty',
+                                 'objNumClicks': -1})
         # if database is empty -> create new Click() obj
         elif request.method == 'GET':
             new_click_obj = Click()
